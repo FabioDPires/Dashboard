@@ -1,0 +1,9 @@
+.left {
+  float: left;
+  margin-left: 3vw;
+}
+
+.right {
+  float: right;
+  margin-right: 3vw;
+}

@@ -13,9 +13,24 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class RestServiceService {
+  getSalesInfo() {
+    return this.http.get(endpoint + 'sales');
+  }
   constructor(private http: HttpClient) {}
 
   getCompanyInfo() {
     return this.http.get(endpoint + 'information');
+  }
+
+  getClientsInfo() {
+    return this.http.get(endpoint + 'clients');
+  }
+
+  getPurchasesInfo() {
+    return this.http.get(endpoint + 'purchases');
+  }
+
+  getSuppliersInfo() {
+    return this.http.get(endpoint + 'suppliers');
   }
 }

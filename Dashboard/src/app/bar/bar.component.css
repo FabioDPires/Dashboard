@@ -1,0 +1,11 @@
+mat-toolbar {
+  background-color: #283593;
+  color: white;
+}
+
+.companyname {
+  margin-left: 2vw;
+}
+.fiscalyear {
+  margin-left: 1200px;
+}
