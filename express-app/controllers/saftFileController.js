@@ -55,10 +55,57 @@ saftFileController.productsInfo = function (req, res) {
       console.log("Error: ", error);
       res.json({ Error: err });
     } else {
+      let products = [];
       const JSONObject = JSON.parse(JSON.stringify(fileContent));
-      const products = JSONObject[1].Product;
-      const numberProducts = products.length - 1; //"Linha especial" doesn´t count as a product
-      res.json({ products: products, quantity: numberProducts });
+      const product = JSONObject[1].Product;
+      const numberProducts = product.length - 1; //"Linha especial" doesn´t count as a product
+      for (let i = 0; i < numberProducts; i++) {
+        products[i] = product[i];
+      }
+      const sales = JSONObject[3].SalesInvoices.Invoice;
+      let productSales = [];
+      let index = 0;
+
+      for (let invoice = 0; invoice < sales.length; invoice++) {
+        let lines = sales[invoice].Line;
+        for (let l = 0; l < lines.length; l++) {
+          productSales.push({
+            produto: lines[l].ProductCode,
+            quantidade: parseFloat(lines[l].Quantity),
+            nome: lines[l].ProductDescription,
+          });
+        }
+      }
+
+      var holder = {};
+
+      productSales.forEach(function (d) {
+        if (holder.hasOwnProperty(d.produto)) {
+          holder[d.produto] = holder[d.produto] + d.quantidade;
+        } else {
+          holder[d.produto] = d.quantidade;
+        }
+      });
+
+      var productSales2 = [];
+
+      for (var prop in holder) {
+        productSales2.push({ produto: prop, quantidade: holder[prop] });
+      }
+      productSales2.sort(function (a, b) {
+        var keyA = a.quantidade,
+          keyB = b.quantidade;
+        // Compare the 2 dates
+        if (keyA < keyB) return 1;
+        if (keyA > keyB) return -1;
+        return 0;
+      });
+      console.log("TAMANHO :", productSales2.length);
+      res.json({
+        products: products,
+        quantity: numberProducts,
+        productSales: productSales2,
+      });
     }
   });
 };
@@ -99,7 +146,9 @@ saftFileController.revenuePerMonth = function (req, res) {
         monthSales[i] = 0;
       }
       const JSONObject = JSON.parse(JSON.stringify(fileContent));
-      const liquidSalesValue = JSONObject[3].SalesInvoices.TotalCredit;
+      const liquidSalesValue = parseFloat(
+        JSONObject[3].SalesInvoices.TotalCredit
+      );
       const sales = JSONObject[3].SalesInvoices.Invoice;
       const numberOfSales = sales.length;
       for (let i = 0; i < sales.length; i++) {
@@ -119,10 +168,21 @@ saftFileController.revenuePerMonth = function (req, res) {
           vendas: monthSales[i],
         };
       }
+
+      let ClientSales = JSONObject[1].GeneralLedgerAccounts;
+      let clientSales = [];
+
+      for (let i = 6; i < 13; i++) {
+        clientSales[i - 6] = {
+          nome: ClientSales.Account[i].AccountDescription,
+          valor: ClientSales.Account[i].ClosingDebitBalance,
+        };
+      }
       res.json({
         numberOfSales: numberOfSales,
         monthSales: monthSales,
         TotalCredit: liquidSalesValue,
+        clientsSales: clientSales,
       });
     }
   });
@@ -157,34 +217,22 @@ saftFileController.purchaseDetails = function (req, res) {
       const purchases = JSONObject[2].Journal[1].Transaction;
 
       for (let i = 0; i < purchases.length; i++) {
-        if (i == 0 || i % 7 == 0 || i == 17 || i === 41) {
-          numberOfSuppliersPurchases++;
-          console.log(
-            "TRANSFORMADO!!!! MES:",
-            purchases[i].Period,
-            " VALOR:",
-            purchases[i].Lines.CreditLine.CreditAmount
-          );
-        } else {
-          monthPurchases[purchases[i].Period - 1] += parseFloat(
-            purchases[i].Lines.CreditLine.CreditAmount
-          );
-          totalPurchase += parseFloat(
-            purchases[i].Lines.CreditLine.CreditAmount
-          );
-          console.log(
-            "NORMAL!!!! MES:",
-            purchases[i].Period,
-            " VALOR:",
-            purchases[i].Lines.CreditLine.CreditAmount
-          );
-        }
+        monthPurchases[purchases[i].Period - 1] += parseFloat(
+          purchases[i].Lines.CreditLine.CreditAmount
+        );
+        totalPurchase += parseFloat(purchases[i].Lines.CreditLine.CreditAmount);
+        console.log(
+          " MES:",
+          purchases[i].Period,
+          " VALOR:",
+          purchases[i].Lines.CreditLine.CreditAmount
+        );
       }
       for (let i = 0; i < monthPurchases.length; i++) {
         monthPurchases[i] = parseFloat(monthPurchases[i].toFixed(2));
       }
 
-      numberOfPurchases = purchases.length - numberOfSuppliersPurchases;
+      numberOfPurchases = purchases.length;
 
       for (let i = 0; i < 12; i++) {
         monthPurchases[i] = {

@@ -33,4 +33,8 @@ export class RestServiceService {
   getSuppliersInfo() {
     return this.http.get(endpoint + 'suppliers');
   }
+
+  getProductsInfo() {
+    return this.http.get(endpoint + 'products');
+  }
 }

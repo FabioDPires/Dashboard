@@ -14,6 +14,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { SupplierComponent } from './supplier/supplier.component';
+import { SpentSuppliersComponent } from './spent-suppliers/spent-suppliers.component';
+import { SpentClientsComponent } from './spent-clients/spent-clients.component';
+import { TopProductsComponent } from './top-products/top-products.component';
+import { MatCardModule } from '@angular/material/card';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,10 @@ import { SupplierComponent } from './supplier/supplier.component';
     PurchaseComponent,
     DashboardComponent,
     SupplierComponent,
+    SpentSuppliersComponent,
+    SpentClientsComponent,
+    TopProductsComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +42,7 @@ import { SupplierComponent } from './supplier/supplier.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatTableModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
