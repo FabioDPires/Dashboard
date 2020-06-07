@@ -22,7 +22,7 @@ export class SpentSuppliersComponent implements OnInit {
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: 'Montante Gasto Por Fornecedor',
+          text: 'Montante Gasto Com Cada Fornecedor',
         },
         data: [
           {

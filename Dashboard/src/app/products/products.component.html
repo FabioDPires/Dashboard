@@ -1,6 +1,9 @@
 <h1>Produtos</h1>
 <div *ngIf="productsInfo" class="content">
-  <h3>Número de Produtos: {{ productsInfo.quantity }}</h3>
+  <div class="card-content">
+    <mat-card-subtitle>Número de Produtos</mat-card-subtitle>
+    <mat-card-content>{{ productsInfo.quantity }}</mat-card-content>
+  </div>
   <table
     mat-table
     [dataSource]="productsInfo.products"

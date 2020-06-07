@@ -1,6 +1,9 @@
 <h1>Fornecedores</h1>
 <div *ngIf="suppliersInfo" class="content">
-  <h3>Número de Fornecedores: {{ suppliersInfo.numberOfSuppliers }}</h3>
+  <div class="card-content">
+    <mat-card-subtitle>Número de Fornecedores</mat-card-subtitle>
+    <mat-card-content>{{ suppliersInfo.numberOfSuppliers }}</mat-card-content>
+  </div>
   <table
     mat-table
     [dataSource]="suppliersInfo.suppliers"

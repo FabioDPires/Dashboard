@@ -35,13 +35,17 @@
 }
 
 .margin-right {
-  margin-right: 40vw;
+  margin-right: 100px;
 }
 
 .margin-top {
-  margin-top: 6vh;
+  margin-top: 12vh;
 }
 
 .margin-left {
   margin-left: 5vw;
+}
+
+.pie {
+  width: 400px;
 }

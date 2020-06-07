@@ -10,10 +10,14 @@
     </div>
   </div>
   <div class="flex">
-    <app-spent-clients class="margin-top margin-left"></app-spent-clients>
-    <div class="margin-right margin-top">
-      <app-spent-suppliers></app-spent-suppliers>
-    </div>
+    <app-clients></app-clients>
+    <app-spent-clients class="margin-top margin-right pie"></app-spent-clients>
+  </div>
+  <div class="flex">
+    <app-supplier></app-supplier>
+    <app-spent-suppliers
+      class="margin-top margin-right pie"
+    ></app-spent-suppliers>
   </div>
 </div>
 
@@ -25,5 +29,3 @@
     <app-top-products></app-top-products>
   </div>
 </div>
-<app-clients></app-clients>
-<app-supplier></app-supplier>

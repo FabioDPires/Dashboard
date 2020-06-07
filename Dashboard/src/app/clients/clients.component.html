@@ -1,6 +1,9 @@
 <h1>Clientes</h1>
 <div *ngIf="clientsInfo" class="content">
-  <h3>Número de Clientes: {{ clientsInfo.numberOfClients }}</h3>
+  <div class="card-content">
+    <mat-card-subtitle>Número de Clientes</mat-card-subtitle>
+    <mat-card-content>{{ clientsInfo.numberOfClients }}</mat-card-content>
+  </div>
   <table mat-table [dataSource]="clientsInfo.clients" class="mat-elevation-z8">
     <ng-container matColumnDef="Nome">
       <th mat-header-cell *matHeaderCellDef>Nome</th>
