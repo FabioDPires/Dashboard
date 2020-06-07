@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RestServiceService } from '../rest-service.service';
-import { parse } from 'path';
 
 @Component({
   selector: 'app-card',

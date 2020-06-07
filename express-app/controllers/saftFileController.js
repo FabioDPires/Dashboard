@@ -206,7 +206,6 @@ saftFileController.purchaseDetails = function (req, res) {
       months[9] = "Outubro";
       months[10] = "Novembro";
       months[11] = "Dezembro";
-      let numberOfSuppliersPurchases = 0;
       let totalPurchase = 0;
       let monthPurchases = [];
       for (let i = 0; i < 12; i++) {

@@ -9,3 +9,13 @@ h1 {
 .content {
   margin-right: 4vw;
 }
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+mat-card-subtitle {
+  font-size: large;
+}
