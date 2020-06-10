@@ -1,0 +1,22 @@
+<app-bar></app-bar>
+<app-side-bar></app-side-bar>
+<div *ngIf="clientInfo" class="content">
+  <h2>{{ clientInfo.cliente.CompanyName }}</h2>
+  <p>ID do Cliente: {{ clientInfo.cliente.CustomerID }}</p>
+  <p>
+    Morada: {{ clientInfo.cliente.BillingAddress.AddressDetail }},
+    {{ clientInfo.cliente.BillingAddress.PostalCode }},
+    {{ clientInfo.cliente.BillingAddress.City }} ,
+    {{ clientInfo.cliente.BillingAddress.Region }},
+    {{ clientInfo.cliente.BillingAddress.Country }}
+  </p>
+  <p>Fax: {{ clientInfo.cliente.Fax }}</p>
+  <p>Telefone: {{ clientInfo.cliente.Telephone }}</p>
+  <p>
+    Morada de Envio: {{ clientInfo.cliente.ShipToAddress.AddressDetail }},
+    {{ clientInfo.cliente.ShipToAddress.PostalCode }},
+    {{ clientInfo.cliente.ShipToAddress.City }} ,
+    {{ clientInfo.cliente.ShipToAddress.Region }},
+    {{ clientInfo.cliente.ShipToAddress.Country }}
+  </p>
+</div>

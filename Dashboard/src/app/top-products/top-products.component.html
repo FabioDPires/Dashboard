@@ -1,5 +1,5 @@
-<div *ngIf="productsTop">
-  <h3>Top 5 Produtos Vendidos</h3>
+<div *ngIf="productsTop" class="top">
+  <h3>Top 5 Produtos Vendidos(unidades)</h3>
   <table
     mat-table
     [dataSource]="productsTop.productSales"
@@ -7,11 +7,15 @@
   >
     <ng-container matColumnDef="Código">
       <th mat-header-cell *matHeaderCellDef>Código</th>
-      <td mat-cell *matCellDef="let product">{{ product.produto }}</td>
+      <td mat-cell *matCellDef="let product">
+        <a routerLink="/dashboard/product/{{ product.produto }}">{{
+          product.produto
+        }}</a>
+      </td>
     </ng-container>
 
-    <ng-container matColumnDef="Quantidade Vendida">
-      <th mat-header-cell *matHeaderCellDef>Quantidade Vendida</th>
+    <ng-container matColumnDef="Quantidade Vendida(unidades)">
+      <th mat-header-cell *matHeaderCellDef>Quantidade Vendida(unidades)</th>
       <td mat-cell *matCellDef="let product">
         {{ product.quantidade }}
       </td>

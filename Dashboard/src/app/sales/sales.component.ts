@@ -20,7 +20,7 @@ export class SalesComponent implements OnInit {
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: 'Vendas Mensais(valor líquido)',
+          text: 'Vendas Mensais(€)',
         },
         data: [
           {

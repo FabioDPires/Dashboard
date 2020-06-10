@@ -16,4 +16,11 @@ router.get("/purchases", saft.purchaseDetails);
 
 router.get("/suppliers", saft.suppliersInfo);
 
+router.get("/client/:id", saft.clientDetails);
+
+router.get("/product/:id", saft.productDetails);
+
+router.get("/supplier/:id", saft.supplierDetails);
+
+router.get("/sales/:id", saft.saleDetail);
 module.exports = router;

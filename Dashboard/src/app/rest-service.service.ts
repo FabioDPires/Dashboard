@@ -13,6 +13,13 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class RestServiceService {
+  getSaleDetails(idTemp: any) {
+    return this.http.get<any>(endpoint + 'sales/' + idTemp);
+  }
+  getSupplierDetails(idTemp: any) {
+    return this.http.get<any>(endpoint + 'supplier/' + idTemp);
+  }
+
   getSalesInfo() {
     return this.http.get(endpoint + 'sales');
   }
@@ -36,5 +43,13 @@ export class RestServiceService {
 
   getProductsInfo() {
     return this.http.get(endpoint + 'products');
+  }
+
+  getClientDetails(id: String): Observable<any> {
+    return this.http.get<any>(endpoint + 'client/' + id);
+  }
+
+  getProductDetails(id: String): Observable<any> {
+    return this.http.get<any>(endpoint + 'product/' + id);
   }
 }

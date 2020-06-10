@@ -9,8 +9,13 @@
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-left: 5vw;
 }
 
 mat-card-subtitle {
   font-size: large;
+}
+
+.low {
+  margin-top: 3vh;
 }

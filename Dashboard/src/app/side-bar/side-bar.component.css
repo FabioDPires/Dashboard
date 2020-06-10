@@ -1,0 +1,24 @@
+mat-sidenav-cointaner {
+  background-color: red;
+}
+
+mat-sidenav-content {
+  background-color: #dbe4ee;
+  height: 100vh;
+  width: 10vw;
+  position: fixed;
+}
+
+mat-sidenav-container {
+  background-color: sienna;
+}
+
+p {
+  margin-top: 3vh;
+  margin-left: 1vw;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}

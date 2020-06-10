@@ -1,0 +1,9 @@
+<app-bar></app-bar>
+<app-side-bar></app-side-bar>
+<div *ngIf="productInfo" class="content">
+  <h2>{{ productInfo.produto.ProductDescription }}</h2>
+  <p>Código do Produto: {{ productInfo.produto.ProductCode }}</p>
+  <p>Familia do Produto: {{ productInfo.produto.ProductGroup }}</p>
+  <p>Valor líquido em vendas: {{ productInfo.totalVendas }}€</p>
+  <p>Quantidade Vendida: {{ productInfo.quantidadeVendida }} unidades</p>
+</div>

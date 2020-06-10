@@ -1,0 +1,32 @@
+<app-bar></app-bar>
+<div class="side">
+  <app-side-bar></app-side-bar>
+  <div class="column">
+    <div *ngFor="let v of saleDetail">
+      <h1>Venda</h1>
+      <p>
+        Cliente
+        <a routerLink="/dashboard/client/{{ v.CustomerID }}">{{
+          v.CustomerID
+        }}</a>
+      </p>
+      <p>Valor líquido: {{ v.DocumentTotals.NetTotal }}€</p>
+      <p>Valor bruto: {{ v.DocumentTotals.GrossTotal }}€</p>
+      <h2>Produtos Vendidos</h2>
+      <div *ngFor="let l of v.Line">
+        <h3>Produto</h3>
+        <p>
+          Codigo Produto:
+          <a routerLink="/dashboard/product/{{ l.ProductCode }}">{{
+            l.ProductCode
+          }}</a>
+        </p>
+        <p>Nome: {{ l.ProductDescription }}</p>
+
+        <p>Quantidade: {{ l.Quantity }}</p>
+        <p>Preço da Unidade: {{ l.UnitPrice }}€</p>
+        <p>Total: {{ l.CreditAmount }}€</p>
+      </div>
+    </div>
+  </div>
+</div>

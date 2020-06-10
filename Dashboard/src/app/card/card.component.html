@@ -1,14 +1,31 @@
 <div class="flex-row">
   <div class="card-content">
+    <mat-card-subtitle>Valor Bruto das Vendas</mat-card-subtitle>
+    <mat-card-content>{{ taxSales }}€</mat-card-content>
+  </div>
+  <div class="card-content">
     <mat-card-subtitle>Valor Líquido das Vendas</mat-card-subtitle>
     <mat-card-content>{{ salesValue }}€</mat-card-content>
   </div>
+
   <div class="card-content">
     <mat-card-subtitle>Valor das Compras</mat-card-subtitle>
     <mat-card-content>{{ purchasesValue }}€</mat-card-content>
   </div>
   <div class="card-content">
-    <mat-card-subtitle>Margem Bruta</mat-card-subtitle>
+    <mat-card-subtitle>Lucro</mat-card-subtitle>
     <mat-card-content>{{ difference }}€</mat-card-content>
+  </div>
+  <div class="card-content low" style="margin-top: -0.1vh;">
+    <mat-card-subtitle>Faturas Emitidas</mat-card-subtitle>
+    <mat-card-content>{{ faturas }}</mat-card-content>
+  </div>
+  <div class="card-content low" style="margin-top: -0.2vh;">
+    <mat-card-subtitle>VFA</mat-card-subtitle>
+    <mat-card-content>{{ this.vfa }}</mat-card-content>
+  </div>
+  <div class="card-content low" style="margin-top: -0.2vh;">
+    <mat-card-subtitle>ECF</mat-card-subtitle>
+    <mat-card-content>{{ this.ecf }}</mat-card-content>
   </div>
 </div>

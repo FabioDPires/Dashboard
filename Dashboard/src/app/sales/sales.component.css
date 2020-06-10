@@ -7,15 +7,21 @@ h1 {
 }
 
 .content {
-  margin-left: 4vw;
+  margin-left: -100vw;
 }
 
 .card-content {
   display: flex;
   flex-direction: column;
   justify-content: start;
+  margin-left: -10vw;
+  margin-top: 3vh;
 }
 
 mat-card-subtitle {
   font-size: large;
+}
+
+.graph {
+  margin-left: -10vw;
 }

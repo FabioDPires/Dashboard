@@ -1,16 +1,13 @@
+.top {
+  margin-top: 5vh;
+  margin-left: -15vh;
+}
 table {
-  width: 100%;
+  width: 400px;
+  margin-bottom: 5vh;
 }
 
-.content,
-h1 {
-  margin-right: 3vw;
-}
-
-h1 {
-  margin-top: 2vh;
-}
-
-h3 {
-  margin-top: -101vh;
+a {
+  text-decoration: none;
+  color: black;
 }

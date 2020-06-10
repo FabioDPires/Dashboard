@@ -1,51 +1,17 @@
-.left {
-  float: left;
-  margin-left: 3vw;
-}
-
-.right {
-  float: right;
-  margin-right: 3vw;
-}
-
-.flex {
+.side {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.product {
-  width: 600px;
-}
-
-.margin {
-  margin-right: 3vw;
-}
-
-.columns {
+.column {
   display: flex;
   flex-direction: column;
 }
 
-.flex2 {
+.side2 {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-}
-
-.margin-right {
-  margin-right: 100px;
-}
-
-.margin-top {
-  margin-top: 12vh;
-}
-
-.margin-left {
-  margin-left: 5vw;
-}
-
-.pie {
-  width: 400px;
+  justify-content: space-evenly;
+  margin-left: 30vw;
+  margin-top: 10vh;
 }

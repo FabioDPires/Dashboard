@@ -19,6 +19,14 @@ import { SpentClientsComponent } from './spent-clients/spent-clients.component';
 import { TopProductsComponent } from './top-products/top-products.component';
 import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from './card/card.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { SupplierDetailsComponent } from './supplier-details/supplier-details.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { TopProductsMoneyComponent } from './top-products-money/top-products-money.component';
+import { SalesMonthComponent } from './sales-month/sales-month.component';
+import { SalesDetailsComponent } from './sales-details/sales-details.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +42,13 @@ import { CardComponent } from './card/card.component';
     SpentClientsComponent,
     TopProductsComponent,
     CardComponent,
+    ClientDetailsComponent,
+    ProductDetailsComponent,
+    SupplierDetailsComponent,
+    SideBarComponent,
+    TopProductsMoneyComponent,
+    SalesMonthComponent,
+    SalesDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +58,7 @@ import { CardComponent } from './card/card.component';
     MatToolbarModule,
     MatTableModule,
     MatCardModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

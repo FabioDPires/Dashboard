@@ -1,0 +1,22 @@
+<app-bar></app-bar>
+<app-side-bar></app-side-bar>
+<div *ngIf="supplierInfo" class="content">
+  <h2>{{ supplierInfo.supplier.CompanyName }}</h2>
+  <p>ID do Fornecedor: {{ supplierInfo.supplier.SupplierID }}</p>
+  <p>
+    Morada: {{ supplierInfo.supplier.BillingAddress.AddressDetail }},
+    {{ supplierInfo.supplier.BillingAddress.PostalCode }},
+    {{ supplierInfo.supplier.BillingAddress.City }} ,
+    {{ supplierInfo.supplier.BillingAddress.Region }},
+    {{ supplierInfo.supplier.BillingAddress.Country }}
+  </p>
+  <p>Fax: {{ supplierInfo.supplier.Fax }}</p>
+  <p>Telefone: {{ supplierInfo.supplier.Telephone }}</p>
+  <p>
+    Morada de Envio: {{ supplierInfo.supplier.ShipFromAddress.AddressDetail }},
+    {{ supplierInfo.supplier.ShipFromAddress.PostalCode }},
+    {{ supplierInfo.supplier.ShipFromAddress.City }} ,
+    {{ supplierInfo.supplier.ShipFromAddress.Region }},
+    {{ supplierInfo.supplier.ShipFromAddress.Country }}
+  </p>
+</div>

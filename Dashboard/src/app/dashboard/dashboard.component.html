@@ -1,31 +1,21 @@
 <app-bar></app-bar>
-<app-card></app-card>
-<div class="columns">
-  <div class="flex2">
-    <div class="left">
+<div class="side">
+  <app-side-bar></app-side-bar>
+  <div class="column">
+    <app-card style="margin-left: 10vw;"></app-card>
+    <div class="side2">
       <app-sales></app-sales>
+      <app-spent-clients style="margin-left: 10vw;"></app-spent-clients>
     </div>
-    <div class="right">
+    <div class="side2">
       <app-purchase></app-purchase>
+      <app-spent-suppliers style="margin-left: 10vw;"></app-spent-suppliers>
     </div>
-  </div>
-  <div class="flex">
-    <app-clients></app-clients>
-    <app-spent-clients class="margin-top margin-right pie"></app-spent-clients>
-  </div>
-  <div class="flex">
-    <app-supplier></app-supplier>
-    <app-spent-suppliers
-      class="margin-top margin-right pie"
-    ></app-spent-suppliers>
-  </div>
-</div>
-
-<div class="flex">
-  <div class="product">
-    <app-products></app-products>
-  </div>
-  <div class="product margin">
-    <app-top-products></app-top-products>
+    <div class="side2">
+      <app-top-products></app-top-products>
+      <app-top-products-money
+        style="margin-left: 10vw; margin-top: -5vh;"
+      ></app-top-products-money>
+    </div>
   </div>
 </div>

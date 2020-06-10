@@ -22,7 +22,7 @@ export class SpentClientsComponent implements OnInit {
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: 'Montante Gasto Por Cliente(com imposto)',
+          text: 'Montante Gasto Por Cliente(€)',
         },
         data: [
           {

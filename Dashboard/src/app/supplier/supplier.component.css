@@ -1,23 +1,12 @@
-table {
-  width: 900px;
-  margin-top: 2vh;
+li {
+  list-style-type: none;
 }
 
-.content,
-h1 {
-  margin-left: 3vw;
+.content {
+  margin-left: 10vw;
 }
 
-h1 {
-  margin-top: 4vh;
-}
-
-.card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-}
-
-mat-card-subtitle {
-  font-size: large;
+h2 {
+  margin-left: 2vw;
+  margin-top: 3vh;
 }

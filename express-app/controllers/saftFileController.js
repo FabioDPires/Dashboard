@@ -64,7 +64,6 @@ saftFileController.productsInfo = function (req, res) {
       }
       const sales = JSONObject[3].SalesInvoices.Invoice;
       let productSales = [];
-      let index = 0;
 
       for (let invoice = 0; invoice < sales.length; invoice++) {
         let lines = sales[invoice].Line;
@@ -100,11 +99,50 @@ saftFileController.productsInfo = function (req, res) {
         if (keyA > keyB) return -1;
         return 0;
       });
+
+      //POR VALOR
+
+      productSales3 = [];
+      for (let invoice = 0; invoice < sales.length; invoice++) {
+        let lines = sales[invoice].Line;
+        for (let l = 0; l < lines.length; l++) {
+          productSales3.push({
+            produto: lines[l].ProductCode,
+            valorVenda: parseFloat(lines[l].CreditAmount),
+          });
+        }
+      }
+
+      var holder2 = {};
+
+      productSales3.forEach(function (d) {
+        if (holder2.hasOwnProperty(d.produto)) {
+          holder2[d.produto] = holder2[d.produto] + d.valorVenda;
+        } else {
+          holder2[d.produto] = d.valorVenda;
+        }
+      });
+
+      var productSales4 = [];
+
+      for (var prop in holder2) {
+        productSales4.push({ produto: prop, valorVenda: holder2[prop] });
+      }
+      productSales4.sort(function (a, b) {
+        var keyA = a.valorVenda,
+          keyB = b.valorVenda;
+        // Compare the 2 dates
+        if (keyA < keyB) return 1;
+        if (keyA > keyB) return -1;
+        return 0;
+      });
+
       console.log("TAMANHO :", productSales2.length);
       res.json({
         products: products,
         quantity: numberProducts,
         productSales: productSales2,
+        productsSalesMoney: productSales4,
       });
     }
   });
@@ -142,6 +180,7 @@ saftFileController.revenuePerMonth = function (req, res) {
       months[10] = "Novembro";
       months[11] = "Dezembro";
       let monthSales = [];
+      let taxSales = 0;
       for (let i = 0; i < 12; i++) {
         monthSales[i] = 0;
       }
@@ -151,9 +190,13 @@ saftFileController.revenuePerMonth = function (req, res) {
       );
       const sales = JSONObject[3].SalesInvoices.Invoice;
       const numberOfSales = sales.length;
+
       for (let i = 0; i < sales.length; i++) {
         console.log("Mes:", sales[i].Period);
         console.log("Net Total:", sales[i].DocumentTotals.NetTotal);
+        taxSales += parseFloat(sales[i].DocumentTotals.GrossTotal);
+        console.log("VALOR BRUTO:", sales[i].DocumentTotals.GrossTotal);
+
         monthSales[sales[i].Period - 1] =
           monthSales[sales[i].Period - 1] +
           parseFloat(sales[i].DocumentTotals.NetTotal);
@@ -183,6 +226,7 @@ saftFileController.revenuePerMonth = function (req, res) {
         monthSales: monthSales,
         TotalCredit: liquidSalesValue,
         clientsSales: clientSales,
+        taxSales: taxSales,
       });
     }
   });
@@ -256,6 +300,115 @@ saftFileController.purchaseDetails = function (req, res) {
         purchases: totalPurchase,
         suppliersPurchases: supplierBuy,
       });
+    }
+  });
+};
+
+saftFileController.clientDetails = function (req, res) {
+  Saft.find().exec(function (err, fileContent) {
+    if (err) {
+      console.log(err);
+    } else {
+      const JSONObject = JSON.parse(JSON.stringify(fileContent));
+      const clients = JSONObject[1].Customer;
+      var costumers = [];
+      let desiredCustomer;
+      for (let i = 2; i < clients.length; i++) {
+        costumers[i] = clients[i];
+        console.log(
+          "CLIENTE:",
+          costumers[i].CustomerID + " --->NOME: " + costumers[i].CompanyName
+        );
+
+        console.log("PROCURA: ", req.params.id);
+        console.log("É IGUAL?:", costumers[i].CustomerID == req.params.id);
+        if (costumers[i].CustomerID == req.params.id) {
+          desiredCustomer = costumers[i];
+        }
+      }
+      res.json({ cliente: desiredCustomer });
+    }
+  });
+};
+
+saftFileController.productDetails = function (req, res) {
+  Saft.find().exec(function (err, fileContent) {
+    if (err) {
+      console.log(err);
+    } else {
+      const JSONObject = JSON.parse(JSON.stringify(fileContent));
+      const product = JSONObject[1].Product;
+      var products = [];
+      let desiredProduct;
+      const numberProducts = product.length - 1; //"Linha especial" doesn´t count as a product
+      for (let i = 0; i < numberProducts; i++) {
+        products[i] = product[i];
+        if (products[i].ProductCode == req.params.id) {
+          desiredProduct = products[i];
+        }
+      }
+      const sales = JSONObject[3].SalesInvoices.Invoice;
+      let productSales = [];
+      let totalVendas = 0;
+      let quantidadeVendida = 0;
+
+      for (let invoice = 0; invoice < sales.length; invoice++) {
+        let lines = sales[invoice].Line;
+        for (let l = 0; l < lines.length; l++) {
+          if (lines[l].ProductCode == req.params.id) {
+            console.log("IGUAL");
+            totalVendas += parseFloat(lines[l].CreditAmount);
+            quantidadeVendida += parseFloat(lines[l].Quantity);
+            console.log("VENDA:", invoice, " LINHA:", l);
+          }
+        }
+        totalVendas = parseFloat(totalVendas.toFixed(2));
+      }
+      res.json({
+        produto: desiredProduct,
+        totalVendas: totalVendas,
+        quantidadeVendida: quantidadeVendida,
+      });
+    }
+  });
+};
+
+saftFileController.supplierDetails = function (req, res) {
+  Saft.find().exec(function (err, fileContent) {
+    if (err) {
+      console.log(err);
+    } else {
+      const JSONObject = JSON.parse(JSON.stringify(fileContent));
+      const supplier = JSONObject[1].Supplier;
+      var suppliers = [];
+      let desiredSupplier;
+
+      for (let i = 0; i < supplier.length; i++) {
+        suppliers[i] = supplier[i];
+        if (suppliers[i].SupplierID == req.params.id) {
+          desiredSupplier = suppliers[i];
+        }
+      }
+      res.json({ supplier: desiredSupplier });
+    }
+  });
+};
+
+saftFileController.saleDetail = function (req, res) {
+  Saft.find().exec(function (err, fileContent) {
+    if (err) {
+      console.log(err);
+    } else {
+      const JSONObject = JSON.parse(JSON.stringify(fileContent));
+      const sales = JSONObject[3].SalesInvoices.Invoice;
+      let desiredMonth = [];
+      console.log("MES:", req.params.id);
+      for (let i = 0; i < sales.length; i++) {
+        if (sales[i].Period == req.params.id) {
+          desiredMonth.push(sales[i]);
+        }
+      }
+      res.json({ vendas: desiredMonth });
     }
   });
 };

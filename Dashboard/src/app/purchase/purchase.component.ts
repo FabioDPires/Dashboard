@@ -20,7 +20,7 @@ export class PurchaseComponent implements OnInit {
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: 'Compras Mensais',
+          text: 'Compras Mensais(€)',
         },
         data: [
           {
